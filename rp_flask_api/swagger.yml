@@ -1,0 +1,100 @@
+openapi: 3.0.0
+info:
+  title: RP Flask REST API
+  description: An API about upcoming events
+  version: 1.0.0
+
+servers:
+  - url: /api
+
+components:
+  schemas:
+    Event:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        date:
+          type: string
+          format: date-time
+        location:
+          type: string
+        ticket_price:
+          type: number
+          format: float
+        tickets_available:
+          type: integer
+  parameters:
+    name:
+      name: name
+      in: path
+      description: The name of the event
+      required: true
+      schema:
+        type: string
+
+paths:
+  /events:
+    get:
+      operationId: events.read_all
+      tags:
+        - Events
+      summary: Read the list of events
+      responses:
+        "200":
+          description: Successfully read events list
+    post:
+      operationId: events.create
+      tags:
+        - Events
+      summary: Create an event
+      requestBody:
+          description: Event to create
+          required: true
+          content:
+            application/json:
+              schema:
+                x-body-name: event
+                $ref: "#/components/schemas/Event"
+      responses:
+        "201":
+          description: Successfully created event
+  /events/{name}:
+    get:
+      operationId: events.read_one
+      tags:
+        - Events
+      summary: Read one event
+      parameters:
+        - $ref: "#/components/parameters/name"
+      responses:
+        "200":
+          description: "Successfully read event"
+    put:
+      tags:
+        - Events
+      operationId: events.update
+      summary: Update an event
+      parameters:
+        - $ref: "#/components/parameters/name"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              x-body-name: event
+              $ref: "#/components/schemas/Event"
+      responses:
+        "200":
+          description: Successfully updated event
+    delete:
+      tags:
+        - Events
+      operationId: events.delete
+      summary: Delete an event
+      parameters:
+        - $ref: "#/components/parameters/name"
+      responses:
+        "204":
+          description: Successfully deleted event
