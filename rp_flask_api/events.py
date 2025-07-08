@@ -1,6 +1,7 @@
 import re
 from datetime import datetime, timezone
 from flask import abort, make_response
+
 from config import db
 from models import Event, event_schema, events_schema
 
@@ -110,9 +111,10 @@ def update(name, event):
 def delete(name):
     # Check if the event exists
     existing_event = Event.query.filter_by(name=name).one_or_none()
-    if not existing_event:
+    if existing_event:
+        # Delete the event from the session and commit
+        db.session.delete(existing_event)
+        db.session.commit()
+        return make_response(f"Event '{name}' successfully deleted", 204)
+    else:
         abort(404, f"Event with name '{name}' not found")
-    # Delete the event from the session and commit
-    db.session.delete(existing_event)
-    db.session.commit()
-    return make_response(f"Event '{name}' successfully deleted", 204)
