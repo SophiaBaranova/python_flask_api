@@ -26,6 +26,19 @@ components:
           format: float
         tickets_available:
           type: integer
+    Subevent:
+      type: object
+      required:
+        - name
+        - event_id
+      properties:
+        name:
+          type: string
+        event_id:
+          type: integer
+        time:
+          type: string
+          format: time
   parameters:
     name:
       name: name
@@ -34,6 +47,13 @@ components:
       required: true
       schema:
         type: string
+    subevent_id:
+      name: subevent_id
+      in: path
+      description: ID of the subevent
+      required: true
+      schema:
+        type: integer
 
 paths:
   /events:
@@ -71,7 +91,7 @@ paths:
         - $ref: "#/components/parameters/name"
       responses:
         "200":
-          description: "Successfully read event"
+          description: Successfully read event
     put:
       tags:
         - Events
@@ -98,3 +118,57 @@ paths:
       responses:
         "204":
           description: Successfully deleted event
+  /subevents:
+    post:
+      operationId: subevents.create
+      tags:
+        - Subevents
+      summary: Create a subevent
+      requestBody:
+        description: Subevent to create
+        required: true
+        content:
+          application/json:
+            schema:
+              x-body-name: subevent
+              $ref: "#/components/schemas/Subevent"
+      responses:
+        "201":
+          description: Successfully created subevent  
+  /subevents/{subevent_id}:
+    get:
+      operationId: subevents.read_one
+      tags:
+        - Subevents
+      summary: Read one subevent
+      parameters:
+        - $ref: "#/components/parameters/subevent_id"
+      responses:
+        "200":
+          description: Successfully read subevent
+    put:
+      tags:
+        - Subevents
+      operationId: subevents.update
+      summary: Update a subevent
+      parameters:
+        - $ref: "#/components/parameters/subevent_id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              x-body-name: subevent
+              $ref: "#/components/schemas/Subevent"
+      responses:
+        "200":
+          description: Successfully updated subevent
+    delete:
+      tags:
+        - Subevents
+      operationId: subevents.delete
+      summary: Delete a subevent
+      parameters:
+        - $ref: "#/components/parameters/subevent_id"
+      responses:
+        "204":
+          description: Successfully deleted subevent  
