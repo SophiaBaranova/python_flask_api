@@ -1,6 +1,7 @@
 from datetime import datetime
-from config import app, db
-from models import Event, Subevent
+
+from rp_flask_api.config import app, db
+from rp_flask_api.models import Event, Subevent
 
 EVENTS = [
   {

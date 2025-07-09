@@ -62,7 +62,7 @@ components:
 paths:
   /events:
     get:
-      operationId: events.read_all
+      operationId: rp_flask_api.events.read_all
       tags:
         - Events
       summary: Read the list of events
@@ -70,7 +70,7 @@ paths:
         "200":
           description: Successfully read events list
     post:
-      operationId: events.create
+      operationId: rp_flask_api.events.create
       tags:
         - Events
       summary: Create an event
@@ -87,7 +87,7 @@ paths:
           description: Successfully created event
   /events/{name}:
     get:
-      operationId: events.read_one
+      operationId: rp_flask_api.events.read_one
       tags:
         - Events
       summary: Read one event
@@ -99,7 +99,7 @@ paths:
     put:
       tags:
         - Events
-      operationId: events.update
+      operationId: rp_flask_api.events.update
       summary: Update an event
       parameters:
         - $ref: "#/components/parameters/name"
@@ -115,7 +115,7 @@ paths:
     delete:
       tags:
         - Events
-      operationId: events.delete
+      operationId: rp_flask_api.events.delete
       summary: Delete an event
       parameters:
         - $ref: "#/components/parameters/name"
@@ -124,7 +124,7 @@ paths:
           description: Successfully deleted event
   /subevents:
     post:
-      operationId: subevents.create
+      operationId: rp_flask_api.subevents.create
       tags:
         - Subevents
       summary: Create a subevent
@@ -141,7 +141,7 @@ paths:
           description: Successfully created subevent  
   /subevents/{subevent_id}:
     get:
-      operationId: subevents.read_one
+      operationId: rp_flask_api.subevents.read_one
       tags:
         - Subevents
       summary: Read one subevent
@@ -153,7 +153,7 @@ paths:
     put:
       tags:
         - Subevents
-      operationId: subevents.update
+      operationId: rp_flask_api.subevents.update
       summary: Update a subevent
       parameters:
         - $ref: "#/components/parameters/subevent_id"
@@ -169,7 +169,7 @@ paths:
     delete:
       tags:
         - Subevents
-      operationId: subevents.delete
+      operationId: rp_flask_api.subevents.delete
       summary: Delete a subevent
       parameters:
         - $ref: "#/components/parameters/subevent_id"
