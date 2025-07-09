@@ -7,7 +7,7 @@ class Subevent(db.Model):
     __tablename__ = "subevent"
     id = db.Column(db.Integer, primary_key=True)
     event_id = db.Column(db.Integer, db.ForeignKey("event.id"))
-    name = db.Column(db.String(32))
+    name = db.Column(db.String(64))
     time = db.Column(db.Time)
 
 
@@ -22,9 +22,9 @@ class SubeventSchema(ma.SQLAlchemyAutoSchema):
 class Event(db.Model):
     __tablename__ = "event"
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(32), unique=True)
+    name = db.Column(db.String(64), unique=True)
     date = db.Column(db.DateTime)
-    location = db.Column(db.String(32))
+    location = db.Column(db.String(64))
     ticket_price = db.Column(db.Float)
     tickets_available = db.Column(db.Integer)
     subevents = db.relationship(
