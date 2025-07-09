@@ -13,6 +13,10 @@ components:
       type: object
       required:
         - name
+        - date
+        - location
+        - ticket_price
+        - tickets_available
       properties:
         name:
           type: string
@@ -30,7 +34,7 @@ components:
       type: object
       required:
         - name
-        - event_id
+        - time
       properties:
         name:
           type: string
