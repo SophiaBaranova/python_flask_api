@@ -1,7 +1,8 @@
 from flask import render_template
-import config
-from models import Event
-from events import read_one
+
+import rp_flask_api.config as config
+from rp_flask_api.models import Event
+from rp_flask_api.events import read_one
 
 app = config.connex_app
 app.add_api(config.basedir / "swagger.yml")

@@ -1,6 +1,7 @@
 from datetime import datetime
 from marshmallow_sqlalchemy import fields
-from config import db, ma
+
+from rp_flask_api.config import db, ma
 
 
 class Subevent(db.Model):

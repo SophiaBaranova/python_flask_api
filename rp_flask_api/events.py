@@ -2,8 +2,8 @@ import re
 from datetime import datetime, timezone
 from flask import abort, make_response
 
-from config import db
-from models import Event, event_schema, events_schema
+from rp_flask_api.config import db
+from rp_flask_api.models import Event, event_schema, events_schema
 
 
 # Custom exception for invalid event data
