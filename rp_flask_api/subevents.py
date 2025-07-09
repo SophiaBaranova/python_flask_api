@@ -1,7 +1,7 @@
 from flask import make_response, abort
 
-from config import db
-from models import Subevent, Event, subevent_schema
+from rp_flask_api.config import db
+from rp_flask_api.models import Subevent, Event, subevent_schema
 
 
 # CRUD operations for Subevent model
