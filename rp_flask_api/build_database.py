@@ -62,21 +62,27 @@ EVENTS = [
   }
 ]
 
-with app.app_context():
-    db.drop_all()
-    db.create_all()
-    for event in EVENTS:
-        new_event = Event(name=event.get("name"),
-                            date=datetime.fromisoformat(event.get("date")),
-                            location=event.get("location"),
-                            ticket_price=event.get("ticket_price"),
-                            tickets_available=event.get("tickets_available"))
-        for name, time in event.get("subevents", []):
-            new_event.subevents.append(
-                Subevent(
-                    name=name,
-                    time=datetime.strptime(time, "%H:%M:%S").time()
-                    )
-                )
-        db.session.add(new_event)
-    db.session.commit()
+
+def build_db():
+  with app.app_context():
+      db.drop_all()
+      db.create_all()
+      for event in EVENTS:
+          new_event = Event(name=event.get("name"),
+                              date=datetime.fromisoformat(event.get("date")),
+                              location=event.get("location"),
+                              ticket_price=event.get("ticket_price"),
+                              tickets_available=event.get("tickets_available"))
+          for name, time in event.get("subevents", []):
+              new_event.subevents.append(
+                  Subevent(
+                      name=name,
+                      time=datetime.strptime(time, "%H:%M:%S").time()
+                      )
+                  )
+          db.session.add(new_event)
+      db.session.commit()
+
+
+if __name__ == "__main__":
+    build_db()
