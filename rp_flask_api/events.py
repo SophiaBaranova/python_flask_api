@@ -98,6 +98,7 @@ def update(name, event):
     # Format the date
     convert_date(update_event)
     # Update the existing event with new data
+    existing_event.name = update_event.name
     existing_event.date = update_event.date
     existing_event.location = update_event.location
     existing_event.ticket_price = update_event.ticket_price
